@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KantinController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +17,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Halaman khusus admin
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('kategori', KategoriController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+
+    Route::resource('kantin', KantinController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

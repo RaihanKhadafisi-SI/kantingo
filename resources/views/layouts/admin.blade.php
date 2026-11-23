@@ -63,6 +63,26 @@
                         </a>
                     </li>
 
+                    @if (auth()->user()->isAdmin())
+                        <li class="nav-header">MANAJEMEN KANTIN</li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('kantin.index') }}"
+                               class="nav-link {{ request()->routeIs('kantin.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-store"></i>
+                                <p>Data Kantin</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('kategori.index') }}"
+                               class="nav-link {{ request()->routeIs('kategori.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tags"></i>
+                                <p>Data Kategori</p>
+                            </a>
+                        </li>
+                    @endif
+
                 </ul>
             </nav>
         </div>
