@@ -83,6 +83,18 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->isAdmin() || auth()->user()->isPenjual())
+                        <li class="nav-header">{{ auth()->user()->isAdmin() ? 'MANAJEMEN MENU' : 'KANTIN SAYA' }}</li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('menu.index') }}"
+                               class="nav-link {{ request()->routeIs('menu.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-utensils"></i>
+                                <p>Data Menu</p>
+                            </a>
+                        </li>
+                    @endif
+
                 </ul>
             </nav>
         </div>

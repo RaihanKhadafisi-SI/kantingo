@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KantinController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->only(['index', 'store', 'update', 'destroy']);
 
     Route::resource('kantin', KantinController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+});
+
+// Halaman untuk admin dan penjual
+Route::middleware(['auth', 'role:admin,penjual'])->group(function () {
+    Route::resource('menu', MenuController::class)
         ->only(['index', 'store', 'update', 'destroy']);
 });
 
