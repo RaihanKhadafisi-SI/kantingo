@@ -95,6 +95,39 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->role === 'pembeli')
+                        <li class="nav-header">BELANJA</li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('katalog.index') }}"
+                               class="nav-link {{ request()->routeIs('katalog.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book-open"></i>
+                                <p>Katalog Menu</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('keranjang.index') }}"
+                               class="nav-link {{ request()->routeIs('keranjang.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-shopping-cart"></i>
+                                <p>
+                                    Keranjang
+                                    @if (count(session('keranjang', [])) > 0)
+                                        <span class="badge badge-warning right">{{ count(session('keranjang', [])) }}</span>
+                                    @endif
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('pesanan.index') }}"
+                               class="nav-link {{ request()->routeIs('pesanan.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-receipt"></i>
+                                <p>Pesanan Saya</p>
+                            </a>
+                        </li>
+                    @endif
+
                 </ul>
             </nav>
         </div>
