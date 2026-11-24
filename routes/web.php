@@ -6,6 +6,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\PesananMasukController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:admin,penjual'])->group(function () {
     Route::resource('menu', MenuController::class)
         ->only(['index', 'store', 'update', 'destroy']);
+});
+
+// Halaman khusus penjual
+Route::middleware(['auth', 'role:penjual'])->group(function () {
+    Route::get('/pesanan-masuk', [PesananMasukController::class, 'index'])->name('pesanan-masuk.index');
+    Route::get('/pesanan-masuk/{pesanan}', [PesananMasukController::class, 'show'])->name('pesanan-masuk.show');
+    Route::patch('/pesanan-masuk/{pesanan}/status', [PesananMasukController::class, 'ubahStatus'])->name('pesanan-masuk.status');
+    Route::patch('/pesanan-masuk/{pesanan}/batal', [PesananMasukController::class, 'batalkan'])->name('pesanan-masuk.batal');
 });
 
 // Halaman khusus pembeli

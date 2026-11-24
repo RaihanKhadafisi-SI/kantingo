@@ -95,6 +95,16 @@
                         </li>
                     @endif
 
+                    @if (auth()->user()->isPenjual())
+                        <li class="nav-item">
+                            <a href="{{ route('pesanan-masuk.index') }}"
+                               class="nav-link {{ request()->routeIs('pesanan-masuk.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-clipboard-list"></i>
+                                <p>Pesanan Masuk</p>
+                            </a>
+                        </li>
+                    @endif
+
                     @if (auth()->user()->role === 'pembeli')
                         <li class="nav-header">BELANJA</li>
 
